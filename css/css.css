@@ -1,0 +1,209 @@
+body
+{
+    margin:0px;
+    padding:0px;
+}
+
+#head
+{
+    overflow: hidden;
+    position: fixed;
+    visibility: visible;
+    z-index: 100;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 28px;
+    background: url('../i/topback.png') repeat scroll 0% 0% transparent;
+
+}
+
+#head ul
+{
+    list-style: none;
+    margin:3px 0 0;
+}
+
+#userinfo
+{
+    color:#111 !important;
+    padding-left: 180px;
+}
+
+#head ul li a, #userinfo
+{
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fefefe;
+    color: #333;
+    font-family: Helvetica, sans;
+    margin:0 20px 0;
+}
+
+#head ul li a:hover, #head ul li a.active
+{
+    text-shadow: 0 1px 0 rgb(70, 69, 69);
+    color: #fefefe;
+}
+
+
+
+
+#topbar
+{
+    overflow: hidden;
+    position: fixed;
+    visibility: visible;
+    z-index: 100;
+    left: 0px;
+    top: 28px;
+    width: 100%;
+    height: 50px;
+    background: url('../i/s1.png') repeat scroll 0% 0% transparent;
+}
+
+#topNavigation 
+{
+    position: absolute;
+    left: 16px;
+    top: 10px;
+}
+
+.topButton
+{
+    height:27px;
+    float:left;
+    min-width: 54px;
+    display: inline-block;
+    position: relative;
+    -moz-user-select: none;
+    cursor: pointer;
+    outline: medium none;
+    border: 1px solid #eee;
+    border-width: 1px 0px 1px 1px;
+    background: none;
+
+}
+
+.topButton:hover, .onHover
+{
+    border: 1px solid #fff;
+    border-width: 1px 0px 1px 1px;
+    /*text-decoration: underline;*/
+    background: #fefefe;
+}
+
+.firstButton{
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.lastButton
+{
+    border-width: 1px;  
+    -webkit-border-top-right-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    -moz-border-radius-topright: 20px;
+    -moz-border-radius-bottomright: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.lastButton:hover, firstButton:hover
+{
+    border: 1px solid #fff;
+    border-width: 1px;  
+}
+
+.topButton
+{
+    padding: 0 8px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #FFF;
+    text-shadow: 0 1px 0 rgb(70, 69, 69);
+}    
+.topButton:hover, .onHover
+{
+    color: #333;
+    text-shadow: 0 1px 0 #33ddee;
+}  
+
+
+
+
+/* Dialog windows*/
+
+#taskDialog
+{
+    display:none; 
+    border:1px solid #888;
+    border-width: 0px 1px 1px 1px;
+    background: #fff;
+    z-index: 9999;
+}
+
+/* Dialog window buttons*/
+div.ui-dialog div.ui-dialog-titlebar a.ui-dialog-titlebar-close span.ui-icon
+{
+    float:right;   
+}
+
+div.ui-dialog div.ui-dialog-titlebar span#ui-dialog-title-taskDialog.ui-dialog-title
+{
+    border-bottom: 2px solid #888888;
+    display: block;
+    height: 28px;
+    margin-left: 58px;
+    text-align: center;
+    width: 500px;
+    z-index: 9990;
+}
+
+
+
+/*Content*/
+.leftTop
+{
+    overflow: hidden; 
+    position: absolute; 
+    visibility: visible; 
+    z-index: -1000; 
+    width: 2px; 
+    height: 1px; 
+    background: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA1JREFUCB1jMGY25gQAAUkAc7JHgccAAAAASUVORK5CYII=&quot;) repeat scroll 0% 0% transparent; 
+    left: 0px; 
+    top: 0px;
+}
+
+.alignleft
+{
+    text-align:left;
+}
+.floatleft
+{
+    float:left;
+} 
+
+.aligncenter{
+    text-align:center;
+}
+
+.alignright
+{
+    text-align:right;
+}
+.floatright
+{
+    float:right;
+} 
+
+.fullwidth
+{
+    width: inherit;
+}

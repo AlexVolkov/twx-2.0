@@ -1,0 +1,4 @@
+ErrorDocument 404 /errors/404.html
+RemoveHandler .html .htm
+AddType text/html .htm .html
+AddType application/x-httpd-php .php .htm .html

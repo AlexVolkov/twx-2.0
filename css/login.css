@@ -1,0 +1,142 @@
+/* 
+    Document   : login
+    Created on : 11.08.2011, 16:20:44
+    Author     : alex
+    Description:
+        Render styles on login page
+*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body 
+{
+    height: 100%;
+}
+
+
+body
+{
+    background: #99c7d9;
+    background: -moz-linear-gradient(left, #99c7d9 0%, #bfdbe6 30%, #cde3ec 50%, #bfdbe6 70%, #7db9e8 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#99c7d9), color-stop(30%,#bfdbe6), color-stop(50%,#cde3ec), color-stop(70%,#bfdbe6), color-stop(100%,#7db9e8));
+    background: -webkit-linear-gradient(left, #99c7d9 0%,#bfdbe6 30%,#cde3ec 50%,#bfdbe6 70%,#7db9e8 100%);
+    background: -o-linear-gradient(left, #99c7d9 0%,#bfdbe6 30%,#cde3ec 50%,#bfdbe6 70%,#7db9e8 100%);
+    background: -ms-linear-gradient(left, #99c7d9 0%,#bfdbe6 30%,#cde3ec 50%,#bfdbe6 70%,#7db9e8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99c7d9', endColorstr='#7db9e8',GradientType=1 );
+    background: linear-gradient(left, #99c7d9 0%,#bfdbe6 30%,#cde3ec 50%,#bfdbe6 70%,#7db9e8 100%);
+    width:100%;
+    height: 100%;
+}
+
+
+#logo
+{
+    position: absolute;
+    background: transparent url('../i/logo.png') no-repeat scroll 0 0;
+    width: 546px;
+    height: 108px;
+    left: 23%;
+    top: 1%
+}
+
+#message
+{
+    background: #c01209;
+    background: -moz-linear-gradient(top, #c01209 0%, #df1b11 100%, #df1b11 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c01209), color-stop(100%,#df1b11), color-stop(100%,#df1b11));
+    background: -webkit-linear-gradient(top, #c01209 0%,#df1b11 100%,#df1b11 100%);
+    background: -o-linear-gradient(top, #c01209 0%,#df1b11 100%,#df1b11 100%);
+    background: -ms-linear-gradient(top, #c01209 0%,#df1b11 100%,#df1b11 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c01209', endColorstr='#df1b11',GradientType=0 );
+    background: linear-gradient(top, #c01209 0%,#df1b11 100%,#df1b11 100%);
+    position: absolute;
+    left: 31.5%;
+    top: 23%;
+    height: 45px;
+    width: 437px;
+    border: 1px solid #3d3b3b;
+    border-radius: 8px;
+    color: #fff;
+    font: 22px/40px Arial,Helvetica,sans-serif;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 9999;
+}
+
+
+#stripe
+{
+    position:absolute;
+    top: 35%;
+    left: 0;
+    width:100%;
+    background: transparent url('../i/b1.png') repeat-x scroll 0 0;
+    height: 198px;
+}
+
+#keyform
+{
+    background: transparent url('../i/keyform.png') no-repeat scroll 0 0;
+    height: 45px;
+    width: 437px;
+    margin: 80px 0 0 32%;
+}
+#keyform input
+{
+    background: none repeat scroll 0 0 transparent;
+    border: none;
+    height: 34px;
+    margin: 5px 0 0 7px;
+    width: 385px;
+    color: #444444;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+}
+#keyform .submit
+{
+    background: none ;
+    border: none;
+    cursor: pointer;
+    height: 35px;
+    margin: 5px 0 0 -4px;
+    width: 41px;
+}  
+
+#footer
+{
+    position:absolute;
+    bottom: 5%;
+    left: 0;
+    width:100%;
+    background: transparent url('../i/footerlogin.png') repeat-x scroll 0 0;
+    height: 60px;
+    z-index: 999;
+    text-align: center;
+}
+
+#footer ul
+{
+    margin-left: 39%;
+}
+#footer ul li
+{
+
+    list-style: none;
+    margin: 18px 0 0 20px;
+    float: left;
+}
+
+#footer ul li a
+{
+    color: #506f7b;
+    font: bold 20px Arial; 
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+#footer ul li a:hover
+{
+    text-decoration: underline;
+}
