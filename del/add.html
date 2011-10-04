@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>adding form</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div>
+            <form method="POST" action="../system/api.php">
+
+                <input type="hidden" name="key_id" value="9a20cd9d6421ed2d6d30d38172f6a237" />
+                <input type="hidden" name="mask" value="9a20cd" /><!--maybe not present, if we create absolutely new task-->
+                <input type="hidden" name="what" value="addTask"/>
+                EditTask
+                DeleteTask
+                GetTaskStatus
+                <input type="hidden" name="id" value="2" />
+                <select name="operation">
+                    <option value="addtask"/>addtask
+                    <option value="addacc"/>addacc
+                    <option value="addsettings"/>addsettings
+                </select>     <br/> 
+
+                <select name="task_type">
+                    <option value="single"/>single
+                    <option value="feed"/>feed
+                    <option value="follow"/>follow
+                    <option value="retweet"/>retweet
+                </select><br/>
+
+                task name <input type="text" name="task_name" value=""/>
+                <textarea name="task_content" ></textarea><br/>
+                task_cron_intval <input type="text" name="task_cron_intval" value="0" /><br/>
+                <hr/>
+                numaccs <input type="text" name="numAccs" value=""/><br/>
+                service <input type="text" name="service" value=""/><br/>
+                drip <input type="checkbox" name="is_dripped" /> <br/>
+                short <input type="text" name="task_shortener" value=""/> <br/>
+                threads <input type="text" name="threads" value="10"/> <br/>
+                <hr/>
+                work_by_sitemap <input type="checkbox" name="work_by_sitemap" /> <br/>
+                grab_titles <input type="checkbox" name="grab_titles" /> <br/>
+                strip_links <input type="checkbox" name="strip_links" /> <br/>
+                <br/>
+                <input type="submit"/>
+            </form> 
+
+
+        </div>
+    </body>
+</html>

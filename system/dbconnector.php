@@ -12,15 +12,15 @@ class DBConn {
     function __construct($path) {
         try { 
             include_once $path.'settings.php';
-            define(DBNAME, $dbs['db']);
+            define(DBNAME, $config['db']);
             
-            define(DBSERVER, $dbs['server']);
-            define(DBUSER, $dbs['user']);
-            define(DBPASS, $dbs['password']);
+            define(DBSERVER, $config['server']);
+            define(DBUSER, $config['user']);
+            define(DBPASS, $config['password']);
             define(DIRECTORY, $scriptRoot);
             define(AUTHURL, $authurl);
             $this->db = new PDO("mysql:host=" . DBSERVER . ";dbname=" . DBNAME, DBUSER, DBPASS);
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         } catch (PDOException $e) {
             echo $e->getMessage(), "\n";
         }

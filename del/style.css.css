@@ -1,0 +1,60 @@
+/* 
+    Document   : style.css
+    Created on : 29.07.2011, 13:04:48
+    Author     : alex
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#header .logo 
+{
+    position: absolute;
+    top: 0;
+    left:0;
+    text-indent: -9999px; 
+    width:15%;
+    background: #DDFF75;
+    height:101px;
+}
+#header .topbar
+{
+    background: transparent url('http://envato.mantizlab.com/themeforest/magneto_admin/gfx/back_navbar_active.jpg') repeat-x 0 0;
+    width:85%; 
+    height:50px; 
+    border-bottom: 1px solid #000000;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left:15%;
+}
+
+#header .topbar ul
+{
+    float:right;
+    margin:3px 4px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    list-style: none;
+}
+#header .topbar ul li 
+{
+    float:left;
+}
+
+#header .keybar
+{
+    position: absolute;
+    left: 15%;
+    top: 50px;
+}
+
+#content 
+{
+    margin:103px 0 0 10px;
+    border: 1px solid black;
+}

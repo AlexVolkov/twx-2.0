@@ -8,7 +8,6 @@ ini_set('zlib.output_handler', 0);
 ini_set('proxy_buffering', 0);
 apache_setenv('no-gzip', 1);
 
-
 require_once ('./settings.php');
 
 //var_dump(stripos($_SERVER["HTTP_HOST"], "emo"));
@@ -41,29 +40,27 @@ if ((isset($_POST['key_id'])) OR (isset($_COOKIE['key_id']) )) {
 
 
 
+
+//TODO:what if we havent key in old and new database both?
+            //check for first time           
+            if ($action->firstTime($key)) {
+                $action->importSamples($key);
+            }
+
             //check if we need update this acc
             if ($action->checkUpdates($key)) {
                 $action->importOldData($key);
             }
-//TODO:what if we havent key in old and new database both?
-            //check for first time           
-            if (!$action->firstTime($key)) {
-                $action->importSamples($key);
-            }
-
 
 
             $userSetts = $action->load('settings', $data = array('key_id' => $key), NULL);
             $str = $userSetts['parameter'];
+
             $str = unserialize($str);
 
-            //var_dump($str);
-            setcookie("key_id", $key, time() + ($str['stay_logged_in'] * 600));
+            setcookie("key_id", $key, time() + (3600 * $str["stay_logged_in"]));
 
-            //checkfirsttime
-            //
-
-            header("Location:./activities.html");
+            header("Location:./activities.php");
             break;
     endswitch;
 }

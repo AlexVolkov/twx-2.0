@@ -4,10 +4,10 @@
  * settings and options
  */
 
-    $config['dbuser']      = "golan76";
-    $config['dbpassword']  = "56yF8rFss";
+    $config['dbuser']      = "g760";
+    $config['dbpassword']  = "873Utfgts";
     $config['db']          = "twx";
     $config['dbserver']    = "localhost";
-    $config['path']        = "/var/www/dev/";
+    $config['path']        = "/var/www/scrpt70/dev/";
     $config['authUrl']     = "http://twindexator.com/pstatus.php?auth=76Fryu89dfT3&mkey=";
 ?>

@@ -1,0 +1,38 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div>
+            <form method="post" action="../system/api.php">
+
+                <input type="hidden" name="key_id" value="9a20cd9d6421ed2d6d30d38172f6a237" />
+                <input type="hidden" name="what" value="updateSettings"/>
+                stay logged in : <input type="text" name="stay_logged_in" value="5" /> hours<br/>
+                remove logs older than <select name="removeLogs">
+                    <option value="3" selected/>3
+                    <option value="4"/>4
+                    <option value="5"/>5
+                    <option value="5"/>6
+                    <option value="5"/>7
+                </select>     <br/> 
+                remove not launched tasks older than <select name="removeTaskWithoutLaunch">
+                    <option value="3" selected/>3
+                    <option value="4"/>4
+                    <option value="5"/>5
+                    <option value="5"/>6
+                    <option value="5"/>7
+                </select>     <br/> 
+                ping results into:<textarea name="pingers"></textarea><br/> 
+                launch tasks after adding <input type="checkbox" name="launchAfterAdd" /><br/> 
+                <input type="submit"/>
+            </form>
+        </div>
+    </body>
+</html>

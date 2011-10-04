@@ -53,6 +53,7 @@ CREATE  TABLE IF NOT EXISTS `twx`.`logs` (
   `date` DATETIME NULL DEFAULT NULL ,
   `source` ENUM('script', 'cron') NULL DEFAULT NULL ,
   `loglevel` SMALLINT(6) NULL DEFAULT NULL ,
+  `recordType` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`, `mask`) ,
   INDEX `tasks-logs` (`mask` ASC) ,
   CONSTRAINT `tasks-logs`

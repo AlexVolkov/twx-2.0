@@ -5,6 +5,8 @@
  * 
  */
 
+
+//net proverki klucha
 require_once '../settings.php';
 require_once $config['path'] . 'system/core.actions.php';
 
@@ -17,9 +19,11 @@ if ($_POST["what"] && $_POST["what"] != '') {
 if ($data['key_id'])
     die(_("NO_KEY_SPECIFIED"));
 
+//var_dump($_POST["what"]);
+
 switch ($_POST["what"]) {
 
-    case "addTask":
+    case "task":
         $what = "addtask";
 
         if (isset($_POST['id']))
@@ -59,6 +63,8 @@ switch ($_POST["what"]) {
         $data['operation'] = "updatesettings";
         $data['parameter'] = ($_POST);
         unset($data['parameter']['key_id'], $data['parameter']['what']);
+        $data['parameter']['pingers'] = base64_encode($data['parameter']['pingers']); 
+        //var_dump($data); die();
         //$data['parameter'] = $act->oneLine($data['parameter']);
         $data['parameter'] = serialize($data['parameter']);
         $tmp = $act->save($data, "updatesettings");

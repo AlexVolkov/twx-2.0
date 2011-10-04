@@ -62,7 +62,7 @@ class CoreActions {
         return true;
     }
 
-    public function load($what, $data, $exclude = NULL) {
+    public function load($what, $data, $exclude = NULL, $limit = NULL) {
 
         if (!$data['key_id'])
             die('NO_KEY_SPECIFIED');
@@ -72,10 +72,12 @@ class CoreActions {
             case "account":
                 if (!$data['id'])
                     die('NO_ID_SPECIFIED');
-                $sql = "SELECT * FROM `" . DBNAME . "`.`accounts` WHERE `id` = '"
-                        . $data['id'] . " AND `key_id` = " . $data['key_id'] . " ';";
-                $res = $this->dbconn->db->query($sql)->fetch(PDO::FETCH_ASSOC);
-                var_dump($res);
+                if($limit)
+                    $limit = "ORDER BY RAND() LIMIT " . $limit;
+                $sql = "SELECT * FROM `" . $this->config['db'] . "`.`accounts` WHERE `key_id` = '" . $data['key_id'] . "' " . $limit . ";";
+                var_dump($sql); //ssssscontinue;
+                $res = $this->dbconn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                return $res; //die();
                 break;
 
             case "settings":
@@ -88,10 +90,12 @@ class CoreActions {
             case "task":
                 if (!$data['id'])
                     die('NO_ID_SPECIFIED');
-                $sql = "SELECT * FROM `" . DBNAME . "`.`tasks` WHERE `id` = '"
+                $sql = "SELECT * FROM `" . $this->config['db'] . "`.`tasks` WHERE `id` = '"
                         . $data['id'] . " AND `key_id` = " . $data['key_id'] . " ';";
-                $res = $this->dbconn->db->query($sql)->fetch(PDO::FETCH_ASSOC);
-                var_dump($res);
+
+                $res = $this->dbconn->query($sql)->fetch(PDO::FETCH_ASSOC);
+                //var_dump($sql);
+                return $res;
                 break;
         }
     }
@@ -110,13 +114,13 @@ class CoreActions {
         unset($str);
 
         if (!$data['key_id'])
-            die("NO_KEY_SPECIFIED");
+            die(_("NO_KEY_SPECIFIED"));
 
         if (($kc = $this->keyCheck($data['key_id'])) != 'ok')
-            die("key is " . $kc);
+            die(_("KEY_IS_" . $kc));
 
         if (!$data['operation'])
-            die("don't know what to do");
+            die(_("DONT_KNOW_WHAT_TO_DO"));
 
         $ans = $this->keyExists($data['key_id']);
         if (!$ans)
@@ -127,12 +131,12 @@ class CoreActions {
 
         switch ($where) {
             case("addtask"):
+                //var_dump($data); die();
                 $mainData = array(
                     'key_id' => $data["key_id"],
                     'operation' => $data["operation"],
                     'mask' => $data["mask"],
                     'task_type' => $data["task_type"],
-                    'service' => $data["service"],
                     'task_name' => $data["task_name"],
                     'task_content' => $data["task_content"],
                     'task_cron_intval' => $data["task_cron_intval"],
@@ -178,6 +182,8 @@ class CoreActions {
                     'key_id',
                     'operation'
                 );
+                //$data['pingers'] = serialize($data['pingers']);
+
                 $q = $this->sqlUpdate('user_config', $data, $exclude, NULL);
                 //var_dump($q);
                 break;
@@ -231,7 +237,14 @@ class CoreActions {
     public function firstTime($key) {
         $sql = "SELECT `keys`.`id` FROM `" . $this->config['db'] . "`.`keys` WHERE `keys`.`id` = '$key'";
         $r = $this->dbconn->query($sql)->fetch(PDO::FETCH_ASSOC);
-        return $r;
+        //var_dump($r);
+        $query = $this->dbconn->query("USE `service`;");
+        $q = $this->dbconn->query("SELECT `key` FROM `keys` WHERE `key` = '$key';")->Fetch(PDO::FETCH_ASSOC);
+        //var_dump($query);
+        if (($q == false) AND ($r == false))
+            return true;
+        else
+            return false;
     }
 
     public function importSamples($key) {
@@ -258,7 +271,7 @@ class CoreActions {
         //import settings
         echo _("import default user settings");
         echo str_repeat(".", 10);
-        $sql = "INSERT INTO `twx`.`user_config` (`id`, `parameter`, `key_id`) VALUES (NULL, 'a:4:{s:14:\"stay_logged_in\";s:1:\"5\";s:10:\"removeLogs\";s:1:\"3\";s:23:\"removeTaskWithoutLaunch\";s:1:\"3\";s:7:\"pingers\";s:0:\"\";}', '$key');";
+        $sql = "INSERT INTO `. $this->config['db'] .`.`user_config` (`id`, `parameter`, `key_id`) VALUES (NULL, 'a:4:{s:14:\"stay_logged_in\";s:1:\"5\";s:10:\"removeLogs\";s:1:\"3\";s:23:\"removeTaskWithoutLaunch\";s:1:\"3\";s:7:\"pingers\";s:0:\"\";}', '$key');";
 
         if (!$this->dbconn->query($sql))
             die(_('ERROR_IMPORT_USER_SETTINGS_FIRST_TIME'));
@@ -270,7 +283,7 @@ class CoreActions {
         //import sample tasks
         echo _("import sample tasks");
         echo str_repeat(".", 10);
-        $sql = "INSERT INTO `twx`.`tasks` (`id`, `key_id`, `mask`, `task_name`, `task_data`, `task_content`, `task_cron_intval`, `task_progress`, `task_status`, `task_type`, `service`) VALUES (NULL, '$key', '', 'noname', NULL, NULL, '0', '0', 'stop', NULL, NULL);";
+        $sql = "INSERT INTO `. $this->config['db'] .`.`tasks` (`id`, `key_id`, `mask`, `task_name`, `task_data`, `task_content`, `task_cron_intval`, `task_progress`, `task_status`, `task_type`, `service`) VALUES (NULL, '$key', '', 'noname', NULL, NULL, '0', '0', 'stop', NULL, NULL);";
         if (!$this->dbconn->query($sql))
             die(_('ERROR_IMPORT_SAMPLE_TASKS_FIRST_TIME'));
 
@@ -281,7 +294,7 @@ class CoreActions {
         //import accounts
         echo _("import sample accounts");
         echo str_repeat(".", 10);
-        $sql = "INSERT INTO `twx`.`accounts` (`id`, `pair`, `service`, `error`, `key_id`) VALUES (NULL, 'vasya:123456', 'twitter', NULL, '$key');";
+        $sql = "INSERT INTO `. $this->config['db'] .`.`accounts` (`id`, `pair`, `service`, `error`, `key_id`) VALUES (NULL, 'vasya:123456', 'twitter', NULL, '$key');";
         if (!$this->dbconn->query($sql))
             die(_('ERROR_IMPORT_SAMPLE_ACCOUNTS_FIRST_TIME'));
 
@@ -485,12 +498,10 @@ class CoreActions {
             }
         }
         unset($ag);
-        echo "<div id=\"overlay\">" . _("done"). "</div> ";
+        echo "<div id=\"overlay\">" . _("done") . "</div> ";
         echo "<br/>";
         $this->flushData(1);
         //ends import accounts
-        
-        
         //import settings
         echo _("transferring user settings");
         echo str_repeat(".", 10);
@@ -517,7 +528,7 @@ class CoreActions {
 
         echo _("done");
         echo "<br/>";
-        $this->flushData(3); 
+        $this->flushData(3);
         echo ("<script type=\"text/javascript\">
             <!--
                 
@@ -529,7 +540,7 @@ class CoreActions {
         echo "</div>";
     }
 
-    private function GenerateMask() {
+    public function GenerateMask() {
         //sleep(1);
         return substr(md5(rand(0, 10000000000)), -10);
     }
@@ -565,6 +576,41 @@ class CoreActions {
             $sqlAct .= " WHERE `id` = '" . $data['id'] . "';";
         }
         return $sqlAct;
+    }
+
+    public function LoadAccs($num, $settings, $key_id) {
+        ($settings == "off") ? $errors = "AND 1" : $errors = "AND error='good' OR error=''"; //errors
+        ($num == "0") ? $limit = "" : $limit = "LIMIT " . $num; //num of accounts to use in
+        ($this->task['ordering'] == "order") ? $order = "" : $order = "ORDER BY RAND()";                             //ordering
+        $sql = "SELECT * FROM `" . $this->config['db'] . "`.`accounts` WHERE `key_id` = '" . $key_id . "' " . $errors . " ORDER BY RAND() " . $limit . " ;";
+        var_dump($sql);
+        die();
+        $r = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $this->accounts = $r; //not needed
+        $this->Logging('total accounts - ' . count($this->accounts));
+        return $r;
+    }
+
+    public function WriteLog($mask, $message, $source, $loglevel, $type) {
+        $sql = "INSERT INTO `twx`.`logs` (
+                                            `id` ,
+                                            `mask` ,
+                                            `record` ,
+                                            `date` ,
+                                            `source` ,
+                                            `loglevel` ,
+                                            `recordType`
+                                          ) VALUES (
+                                             NULL , 
+                                             '$mask', 
+                                             '$message', 
+                                             NOW(), 
+                                             '$source', 
+                                             '$loglevel', 
+                                             '$type'
+                                           );
+                ";
+        $this->dbconn->query($sql);
     }
 
 }
